@@ -11,7 +11,7 @@ import Button from '../public/Button';
 const DarkmodeNav = styled.nav`
   width: 100%;
   height: 80px;
-  background-color: #1e1e1e;
+  background-color: #111111;
   text-align: center;
   display: flex;
   justify-content: center;
