@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { ReactComponent as Palette } from '../../static/palette-fill.svg';
 import { ReactComponent as Sun } from '../../static/brightness-high.svg';
@@ -45,12 +46,14 @@ const Navbar = () => {
   return (
     <DarkmodeNav>
       <Logo>
-        <Palette width={34} height={34} />
+        <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+          <Palette width={34} height={34} />
+        </Link>
         <LogoLabel>SimpliModa</LogoLabel>
       </Logo>
-      <Label>공지사항</Label>
-      <Label>자유게시판</Label>
-      <Label>블로그</Label>
+      <Link to="/blog" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <Label>개발자 블로그</Label>
+      </Link>
       <Logo style={{ margin: '0 30px' }}>
         <Sun width={34} height={34} />
       </Logo>
