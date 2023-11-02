@@ -17,7 +17,7 @@ const Body = styled.div`
 
 /* Component Section */
 
-const Blog = () => {
+const PostPage = () => {
   return (
     <div>
       <Navbar />
@@ -26,4 +26,4 @@ const Blog = () => {
   );
 };
 
-export default Blog;
+export default PostPage;
