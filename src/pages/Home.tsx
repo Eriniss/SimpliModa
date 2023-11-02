@@ -29,7 +29,7 @@ const Label = styled.div`
 
 /* Component Section */
 
-const Home = () => {
+const HomePage = () => {
   return (
     <div>
       <Navbar />
@@ -41,4 +41,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;

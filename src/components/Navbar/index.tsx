@@ -57,7 +57,9 @@ const Navbar = () => {
       <Logo style={{ margin: '0 30px' }}>
         <Sun width={34} height={34} />
       </Logo>
-      <Button>로그인</Button>
+      <Link to="/post">
+        <Button>글 작성</Button>
+      </Link>
     </DarkmodeNav>
   );
 };
