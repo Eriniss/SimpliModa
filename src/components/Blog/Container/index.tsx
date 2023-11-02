@@ -42,34 +42,27 @@ const RegDate = styled.div`
   align-self: flex-end;
 `;
 
-const Container = () => {
+interface ContainerProps {
+  posts: { title: string; body: string; regDate?: string }[];
+}
+
+const Container: React.FC<ContainerProps> = ({ posts }) => {
+  // regDate를 기준으로 내림차순으로 정렬
+  const sortedPosts = [...posts].sort((a, b) => {
+    const dateA = new Date(a.regDate || '1970-01-01'); // regDate를 Date 객체로 변환
+    const dateB = new Date(b.regDate || '1970-01-01');
+    return dateB.getTime() - dateA.getTime(); // 내림차순 정렬
+  });
+
   return (
     <ContainerBox>
-      <TextBox>
-        <Title>Test Title</Title>
-        <Body>Test Body</Body>
-        <RegDate>2023-10-23 16:02</RegDate>
-      </TextBox>
-      <TextBox>
-        <Title>Test Title</Title>
-        <Body>Test Body</Body>
-        <RegDate>2023-10-23 16:02</RegDate>
-      </TextBox>
-      <TextBox>
-        <Title>Test Title</Title>
-        <Body>Test Body</Body>
-        <RegDate>2023-10-23 16:02</RegDate>
-      </TextBox>
-      <TextBox>
-        <Title>Test Title</Title>
-        <Body>Test Body</Body>
-        <RegDate>2023-10-23 16:02</RegDate>
-      </TextBox>
-      <TextBox>
-        <Title>Test Title</Title>
-        <Body>Test Body</Body>
-        <RegDate>2023-10-23 16:02</RegDate>
-      </TextBox>
+      {sortedPosts.map((post, index) => (
+        <TextBox key={index}>
+          <Title>{post.title}</Title>
+          <Body>{post.body}</Body>
+          <RegDate>{post.regDate}</RegDate>
+        </TextBox>
+      ))}
     </ContainerBox>
   );
 };

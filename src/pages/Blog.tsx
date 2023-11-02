@@ -23,7 +23,6 @@ interface Post {
   _id: string;
   title: string;
   body: string;
-  // 추가 필드를 여기에 추가할 수 있음
 }
 
 const BlogPage: React.FC = () => {
@@ -32,7 +31,7 @@ const BlogPage: React.FC = () => {
   useEffect(() => {
     // Axios를 사용하여 Express API에서 데이터 가져오기
     axios
-      .get<Post[]>('http://localhost:8000/blogPosts')
+      .get<Post[]>('http://localhost:8000/blogposts')
       .then((response) => {
         setPosts(response.data);
       })
@@ -45,7 +44,7 @@ const BlogPage: React.FC = () => {
     <div>
       <Navbar />
       <Body>
-        <Container />
+        <Container posts={posts} />
       </Body>
     </div>
   );
