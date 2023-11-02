@@ -111,13 +111,32 @@ const PostPage = () => {
       });
   };
 
+  const handleClickButton = () => {
+    const postData = {
+      title: postTitle,
+      body: postBody,
+      regDate: postRegDate,
+    };
+
+    axios
+      .post('http://localhost:8000/blogposts', postData)
+      .then((response) => {
+        console.log('데이터가 성공적으로 서버로 전송되었습니다.');
+        // 페이지를 이동하도록 처리
+        window.location.href = '/blog'; // '/' 경로로 이동
+      })
+      .catch((error) => {
+        console.error('데이터 전송 중 오류 발생:', error);
+      });
+  };
+
   return (
     <Body>
       <Navbar />
       <Container onSubmit={handleSubmit}>
         <TitleBox placeholder="제목을 입력하세요" onChange={handleChangeTitle} value={postTitle} />
         <BodyBox placeholder="내용을 입력하세요" onChange={handleChangeBody} value={postBody} />
-        <Button>저장</Button>
+        <Button onClick={handleClickButton}>저장</Button>
       </Container>
     </Body>
   );

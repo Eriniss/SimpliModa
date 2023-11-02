@@ -59,7 +59,7 @@ const Container: React.FC<ContainerProps> = ({ posts }) => {
       {sortedPosts.map((post, index) => (
         <TextBox key={index}>
           <Title>{post.title}</Title>
-          <Body>{post.body}</Body>
+          <Body>{post.body.length > 50 ? post.body.slice(0, 300) + '...' : post.body}</Body>
           <RegDate>{post.regDate}</RegDate>
         </TextBox>
       ))}

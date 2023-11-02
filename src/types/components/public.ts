@@ -8,4 +8,5 @@ export type ButtonProps = {
   width?: string;
   hoverBackgroundColor?: string;
   children?: React.ReactNode;
+  onClick?: any;
 };
