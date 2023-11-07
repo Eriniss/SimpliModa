@@ -50,7 +50,7 @@ const TitleBox = styled.input`
 
 const BodyBox = styled.textarea`
   width: 80%;
-  height: 60%;
+  height: 80%;
   outline: none;
   background: transparent;
   padding: 0;
@@ -69,16 +69,20 @@ const BodyBox = styled.textarea`
 
 /* Component Section */
 
-const PostPage = () => {
+const PostingPage = () => {
   const [postTitle, setPostTitle] = useState<string>('');
   const [postBody, setPostBody] = useState<string>('');
-  const [postRegDate, setPostDate] = useState<string>(''); // 초기값은 비워둡니다.
+  const [postRegDate, setPostRegDate] = useState<string>(''); // 초기값은 비워둡니다.
 
   const getCurrentDate = () => {
     const currentDate = new Date();
-    return `${currentDate.getFullYear()}-${
-      currentDate.getMonth() + 1
-    }-${currentDate.getDate()} ${currentDate.getHours()}:${currentDate.getMinutes()}`;
+    const year = currentDate.getFullYear();
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // 2자리 숫자로 변환
+    const day = currentDate.getDate().toString().padStart(2, '0');
+    const hours = currentDate.getHours().toString().padStart(2, '0');
+    const minutes = currentDate.getMinutes().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
   };
 
   const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -92,12 +96,15 @@ const PostPage = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    // 줄 바꿈 문자 '\n'을 <br>로 대체하여 HTML 줄 바꿈 효과를 생성
+    const formattedBody = postBody.replace(/\n/g, '<br>');
+
     const currentDate = getCurrentDate(); // getCurrentDate 함수를 사용하여 현재 날짜와 시간을 가져옵니다.
-    setPostDate(currentDate); // 먼저 postRegDate를 설정합니다.
+    setPostRegDate(currentDate); // 먼저 postRegDate를 설정합니다.
 
     const postData = {
       title: postTitle,
-      body: postBody,
+      body: formattedBody,
       regDate: currentDate, // 이제 postRegDate에 현재 날짜와 시간이 들어갑니다.
     };
 
@@ -112,22 +119,7 @@ const PostPage = () => {
   };
 
   const handleClickButton = () => {
-    const postData = {
-      title: postTitle,
-      body: postBody,
-      regDate: postRegDate,
-    };
-
-    axios
-      .post('http://localhost:8000/blogposts', postData)
-      .then((response) => {
-        console.log('데이터가 성공적으로 서버로 전송되었습니다.');
-        // 페이지를 이동하도록 처리
-        window.location.href = '/blog'; // '/' 경로로 이동
-      })
-      .catch((error) => {
-        console.error('데이터 전송 중 오류 발생:', error);
-      });
+    window.location.href = '/blog';
   };
 
   return (
@@ -142,4 +134,4 @@ const PostPage = () => {
   );
 };
 
-export default PostPage;
+export default PostingPage;

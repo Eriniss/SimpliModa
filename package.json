@@ -50,5 +50,10 @@
   },
   "devDependencies": {
     "@types/styled-components": "^5.1.27"
-  }
+  },
+  "description": "## 사용 언어",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

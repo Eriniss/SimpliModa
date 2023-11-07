@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 /* Style Section */
 
@@ -42,8 +44,14 @@ const RegDate = styled.div`
   align-self: flex-end;
 `;
 
+const Button = styled.button`
+  width: 60px;
+  height: 25px;
+  align-self: flex-end;
+`;
+
 interface ContainerProps {
-  posts: { title: string; body: string; regDate?: string }[];
+  posts: { title: string; body: string; regDate?: string; _id: any }[];
 }
 
 const Container: React.FC<ContainerProps> = ({ posts }) => {
@@ -54,12 +62,28 @@ const Container: React.FC<ContainerProps> = ({ posts }) => {
     return dateB.getTime() - dateA.getTime(); // 내림차순 정렬
   });
 
+  const handleDelete = (postId: string) => {
+    if (window.confirm('정말로 이 글을 삭제하시겠습니까?')) {
+      // 사용자가 확인을 누른 경우에만 삭제 요청을 보냅니다.
+      axios
+        .delete(`http://localhost:8000/blogposts/${postId}`)
+        .then(() => {
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.error('데이터 삭제 중 오류 발생:', error);
+        });
+    }
+  };
+
   return (
     <ContainerBox>
       {sortedPosts.map((post, index) => (
         <TextBox key={index}>
-          <Title>{post.title}</Title>
-          <Body>{post.body.length > 50 ? post.body.slice(0, 300) + '...' : post.body}</Body>
+          <Link style={{ textDecoration: 'none', color: '#FFFFFF' }} to={`/posts/${post._id}`}>
+            <Title>{post.title}</Title>
+          </Link>
+          <Button onClick={() => handleDelete(post._id)}>글삭제</Button>
           <RegDate>{post.regDate}</RegDate>
         </TextBox>
       ))}

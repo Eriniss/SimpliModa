@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios'; // Axios 추가
+import axios from 'axios';
 
 import Navbar from '../components/Navbar';
 import Container from '../components/Blog/Container';
