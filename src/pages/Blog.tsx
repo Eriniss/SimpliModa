@@ -10,7 +10,7 @@ import Container from '../components/Blog/Container';
 const Body = styled.div`
   color: #ffffff;
   background-color: #1e1e1e;
-  height: 100vh;
+  height: auto;
   display: flex;
   align-items: center;
   flex-direction: column;

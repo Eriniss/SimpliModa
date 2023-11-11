@@ -11,7 +11,7 @@ const ContainerBox = styled.div`
   border-radius: 10px;
   padding: 34px;
   width: 45%;
-  height: 80vh;
+  height: 100%;
   margin-top: 34px;
   display: flex;
   flex-direction: column;
